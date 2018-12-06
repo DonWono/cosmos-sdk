@@ -53,8 +53,8 @@ func CollectGenTxsCmd(ctx *server.Context, cdc *codec.Codec) *cobra.Command {
 				genTxsDir = filepath.Join(config.RootDir, "config", "gentx")
 			}
 
-			toPrint := makePrintInfo(config.Moniker, genDoc.ChainID, nodeID, genTxsDir, json.RawMessage(""))
-			initCfg := makeInitConfig(genDoc.ChainID, genTxsDir, name, nodeID, valPubKey)
+			toPrint := newPrintInfo(config.Moniker, genDoc.ChainID, nodeID, genTxsDir, json.RawMessage(""))
+			initCfg := newInitConfig(genDoc.ChainID, genTxsDir, name, nodeID, valPubKey)
 
 			appMessage, err := genAppStateFromConfig(cdc, config, initCfg, genDoc)
 			if err != nil {
@@ -117,7 +117,7 @@ func genAppStateFromConfig(
 	return
 }
 
-func makeInitConfig(chainID, genTxsDir, name, nodeID string,
+func newInitConfig(chainID, genTxsDir, name, nodeID string,
 	valPubKey crypto.PubKey) initConfig {
 
 	return initConfig{
@@ -129,7 +129,7 @@ func makeInitConfig(chainID, genTxsDir, name, nodeID string,
 	}
 }
 
-func makePrintInfo(moniker, chainID, nodeID, genTxsDir string,
+func newPrintInfo(moniker, chainID, nodeID, genTxsDir string,
 	appMessage json.RawMessage) printInfo {
 
 	return printInfo{

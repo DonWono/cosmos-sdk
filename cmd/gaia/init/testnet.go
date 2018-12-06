@@ -278,7 +278,7 @@ func collectGenFiles(
 		config.SetRoot(nodeDir)
 
 		nodeID, valPubKey := nodeIDs[i], valPubKeys[i]
-		initCfg := makeInitConfig(chainID, gentxsDir, moniker, nodeID, valPubKey)
+		initCfg := newInitConfig(chainID, gentxsDir, moniker, nodeID, valPubKey)
 
 		genDoc, err := loadGenesisDoc(cdc, config.GenesisFile())
 		if err != nil {
